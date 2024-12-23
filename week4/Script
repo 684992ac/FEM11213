@@ -48,11 +48,40 @@ colMeans(Out)
 boxplot(Out, col="plum", ylab="R2") ## what are the average Out R2?
 colMeans(Out)
 null <- glm(FAIL~1, data=SC)
-fwd <- step (null , scope=formula(full), dir="forwad"
-length(coef(fwd))           
+fwd <- step(null, scope=formula(full), dir="forward")
+length(coef(fwd))
 ## run a lasso path plot
 spender <- gamlr(xweb, log(yspend), verb=TRUE); spender
 betamin = coef(cv.spender, select='min'); bet
+plot(spender)
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate synthetic data for predictors (xweb)
+n <- 100  # Number of observations
+p <- 10   # Number of predictors
+xweb <- matrix(rnorm(n * p), nrow = n, ncol = p)  # Random normal data
+
+# Create coefficients for a linear relationship
+beta <- runif(p, -2, 2)  # Random coefficients between -2 and 2
+
+# Generate yspend (response variable) with some noise
+yspend <- exp(xweb %*% beta + rnorm(n, sd = 0.5))  # Ensure positive response for log()
+
+# Inspect yspend
+head(yspend)
+dim(xweb)  # Should be 100 x 10
+length(yspend)  # Should be 100
+library(gamlr)
+
+spender <- gamlr(xweb, log(yspend), verb=TRUE)
+plot(spender)
+
+# Basic plot with specified axis limits
+plot(x, y, type="b", xlim=c(-12, 0), ylim=c(0, 2,8),
+     xlab="X-Axis Label", ylab="Y-Axis Label", main="Custom Axis Limits")
+betamin = coef(cv.spender, select="min"); betamin
+head(AIC(spender))
 
 
 

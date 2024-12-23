@@ -1,0 +1,11 @@
+Looking in to uncertainity 
+going through the slides and the book 
+implementing  the code while going throught the material
+1)created a bootstrap loop and run a regression on the coefficients 
+2) bootstrapping more usefull if the general assumptions for frequientist distribution don't hold.
+3) Frequentist approach still better with small sample size if the sample is close to the mean 
+Run BH algorithm created the graph 
+
+
+
+

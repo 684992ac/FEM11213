@@ -1,0 +1,9 @@
+Freshened up on regression
+r paractice with running the code and debugging the code mostly with chat gpt
+Key Concepts to remember 
+Deviance shows how good of a fit is the model 
+null deviance vs fitted model 
+R'2 and generalized R^2 
+satured models b1=b1^
+null model b0=mean
+log-log model good to meassure elasticities 
