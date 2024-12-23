@@ -1,0 +1,88 @@
+browser <- read.csv("~/Desktop/Data Science/FEM11213/Data/browser-domains.csv")
+dim(browser)
+head(browser)
+# Check if browser is a vector or data frame
+if (is.vector(browser)) {
+  # If browser is a vector, calculate directly
+  mean_value <- mean(browser)
+  scaled_variance <- var(browser) / 1e4
+  std_dev <- sqrt(scaled_variance)
+} else if (is.data.frame(browser) && "spend" %in% colnames(browser)) {
+  # If browser is a data frame, use the 'spend' column
+  mean_value <- mean(browser$spend)
+  scaled_variance <- var(browser$spend) / 1e4
+  std_dev <- sqrt(scaled_variance)
+} else {
+  stop("The 'browser' object must be either a numeric vector or a data frame with a 'spend' column.")
+}
+
+# Display results
+cat("Mean:", mean_value, "\n")
+cat("Scaled Variance:", scaled_variance, "\n")
+cat("Standard Deviation:", std_dev, "\n")
+
+sd(mub)
+# Example data
+mub <- c(1, 2, 2, 3, 3, 3, 4, 4, 5, NA, "a")  # Mixed data
+
+# Ensure mub is numeric and handle non-numeric and NA values
+mub <- as.numeric(mub)  # Convert to numeric
+mub <- mub[!is.na(mub)] # Remove NAs
+
+# Create and customize the histogram
+h <- hist(
+  mub,
+  breaks = 5,
+  col = "blue",
+  main = "Histogram of mub",
+  xlab = "Values",
+  ylab = "Frequency"
+)
+
+# Inspect the histogram object
+print(h)
+
+#can you explain why we need each term in the last expression? 
+# Ensure browser is a data frame
+browser <- data.frame(
+  spend = c(100, 200, 300, 400),
+  broadband = c(1, 0, 1, 0),
+  anychildren = c(0, 1, 1, 0)
+)
+
+# Define the bootstrap process
+B <- 1000  # Number of bootstrap iterations
+betas <- matrix(NA, nrow = B, ncol = 3)  # Preallocate space for coefficients
+colnames(betas) <- c("(Intercept)", "broadband", "anychildren")  # Add column names
+
+# Bootstrap loop
+for (b in 1:B) {
+  samp_b <- sample.int(nrow(browser), replace = TRUE)  # Resample rows with replacement
+  reg_b <- glm(log(spend) ~ broadband + anychildren, data = browser[samp_b, ])
+  betas[b, ] <- coef(reg_b)  # Store coefficients
+}
+
+# Display the first 3 rows of betas
+head(betas, n = 3)
+
+# Calculate covariance between broadband and anychildren coefficients
+cov_broadband_anychildren <- cov(betas[, "broadband"], betas[, "anychildren"])
+print(cov_broadband_anychildren)
+
+###
+
+browser <- read.csv("~/Desktop/Data Science/FEM11213/Data/web-browsers (1).csv")
+spendy <- glm(log(spend) ~ . -id, data=browser)
+round(summary(spendy)$coef,2)
+pval <- summary(spendy)$coef[-1, "Pr(>|t|)"]
+pvalrank <- rank(pval)
+reject <- ifelse(pval< (0.1/9)*pvalrank, 2, 1) 
+plot(pvalrank, pval, ylab="p-value", xlab="p-value rank", pch=16, col=reject)
+lines(pvalrank, (0.1/9)*pvalrank)
+dev.off()
+SC <- read.csv("~/Desktop/Data Science/FEM11213/Data/semiconductor.csv")
+dim(SC)
+full <- glm(FAIL ~ ., data=SC, family=binomial)
+pvals <- summary(full)$coef[-1,4] #-1 to drop the intercept
+hist(pvals, xlab="p-value", main="", col="lightblue")#looks like we have some
+fdr_cut(pvals)

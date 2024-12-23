@@ -1,0 +1,21 @@
+oj <- read.csv("~/Desktop/Data Science/FEM11213/oj.csv")
+tail(oj, n=5)
+glm(log(sales) ~ brand + log(price), data=oj)
+glm(log(sales) ~ brand + log(price), data=oj)
+x <- model.matrix(~ brand + log(price), data=oj); head(x); tail(x)
+oj$brand = as.factor(oj$brand)
+x <- model.matrix(~ brand + log(price), data=oj); head(x)
+oj$mybrand = relevel(oj$brand, "tropicana")
+x <- model.matrix(~ mybrand + log(price), data=oj); head(x)
+glm(log(sales) ~ log(price)*brand*feat, data=oj)
+email <- read.csv("~/Desktop/Data Science/FEM11213/spam.csv")
+dim(email)
+spammy <- glm(spam ~ ., data=email, family='binomial')
+coef(spammy)["word_free"]; exp(coef(spammy)["word_free"])
+coef(spammy)["word_george"]; exp(coef(spammy)["word_george"]); 1/exp(coef(spammy)["word_george"])
+predict(spammy, newdata = email[c(1,4000),], type="response")
+summary(spammy)$deviance
+summary(spammy)$null.deviance
+D <- summary(spammy)$deviance; D
+D0 <- summary(spammy)$null.deviance; D0
+R2 <- 1 - D/D0; R2
