@@ -1,0 +1,22 @@
+Reading the book and going through the slides
+and debugging and running the code to replicate and see what happens 
+its getting a bit more different than econometrics
+goal is to predict the what is not already available 
+therefore is vs oos 
+the topic overrfitting becomes an issue if the model perfectly preditcs the data available in sample than this will be problmatic for any out of sample prediction since we will not know how the sample stacts up compared to the data we used for training
+stepwise is indeed computationly heavy 
+lasso vs ridge vs elastic net vs log 
+lasso good at predicting high dimensional data
+log good at data where smak coefficients are meaning full
+ridge penalizes large coefficents more than small ones usefull when all predictors contribute to the outcome
+Ridge works well when predictors are highly correlated, distributing the penalty across coefficients without discarding any.
+combines strenghts of lasso and ridge especially usefull when predictors are strongly correlted
+for cross validation
+Choose K-Fold Cross-Validation:
+The primary goal is prediction accuracy on unseen data.
+You have a large dataset and sufficient computational resources.
+You're evaluating multiple competing models in terms of generalizability.
+Choose AIC When:
+You prioritize model simplicity and interpretability.
+You have a small dataset where cross-validation may not be reliable.
+You need a fast and efficient model selection criterion.
