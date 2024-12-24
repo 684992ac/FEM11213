@@ -1,0 +1,10 @@
+working on the code slides and the book 
+“Conditional ignorability (CI) implies that you observe all of the variables that influence both the treatment and the response. 
+Whenever you hear a causal statement that includes “after controlling for other factors,” there is an implicit assumption of conditional ignorability. ”
+“almost all treatment effect estimation problems are high-dimensional problems when viewed from a high level, and we already know that standard OLS 
+regression techniques are an imperfect tool for high-dimensional problems. You will need to adapt the ML tools, like lasso and CV, for causal 
+inference under the conditional ignorability model.”
+the abortion example really did help me understand it 
+HTE model allows treatment effect to vary across individuals or groups
+the impact of a treatment (d) on an outcome (y) depends on the observable charactaristics or unobsorvable charactaristics (x) 
+
